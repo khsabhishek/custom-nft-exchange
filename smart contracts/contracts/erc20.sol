@@ -20,13 +20,14 @@ contract erc20 is ERC20 {
 
     function mint(address account) external payable {
       require(msg.value >= 1E12);
-        pay();
-        _mint(account, (msg.value * 1E6 / 1E18));
+      pay();
+      _mint(account, (msg.value * 1E6));
     }
 
     function burn(address payable account, uint256 amount) external payable {
+      require(balanceOf(account) >= amount,"account doesnt have enough balance");
       _burn(account, amount);
-      amount =  (amount / 1E6) * 1E18;
+      amount =  (amount / 1E6) ;
       payable(account).transfer(amount);
     }
 
