@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@nestjs/cli": "^9.1.4",
     "dotenv": "^16.0.3",
     "ethers": "^5.7.1"
   }

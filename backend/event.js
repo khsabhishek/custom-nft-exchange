@@ -10,20 +10,22 @@ async function main() {
 
     const contract = new ethers.Contract(exchangeAddress, provider);
 
-    contract.on("buy", (_to, _tokenId, _amount) => {
+    contract.on("buy", (_to, _tokenId, _amount, event) => {
         let buy = {
             To: _to,
             TokenIdBuy: _tokenId,
             AmountBuy: _amount,
+            data: event,
         };
         console.log(JSON.stringify(buy));
     });
 
-    contract.on("sell", (_tokenId, amount, adminAmount) => {
+    contract.on("sell", (_tokenId, amount, adminAmount, event) => {
         let sell = {
             tokenIdSell: _tokenId,
             AmountSell: amount,
             AdminAmount: adminAmount,
+            event: data,
         };
         console.log(JSON.stringify(sell))
     });
