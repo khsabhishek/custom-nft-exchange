@@ -1,34 +1,33 @@
 const ethers = require('ethers');
-const exchangeAbi = require('../backend/abis/exchangeAbi.json');
-require('dotenv').config();
+import abi from '../src/abis/test.json';
+// require('dotenv').config();
 
 async function main() {
   const exchangeAddress = '';
   const provider = new ethers.providers.WebSocketProvider(
-    `wss://goerli.infura.io/ws/v3/${process.env.INFURA_WEBSOCKET}`,
+    `wss://mainnet.infura.io/ws/v3/7c29a074ebf044f18251c824fb11472f`,
   );
 
-  const contract = new ethers.Contract(exchangeAddress, provider);
+  const contract = new ethers.Contract(exchangeAddress, abi, provider);
 
-  contract.on('buy', (_to, _tokenId, _amount, event) => {
+  contract.on('Transfer', (from, to, value) => {
     let buy = {
-      To: _to,
-      TokenIdBuy: _tokenId,
-      AmountBuy: _amount,
-      dataBuy: event,
+      from: from,
+      to: to,
+      value: value,
     };
     console.log(JSON.stringify(buy));
   });
 
-  contract.on('sell', (_tokenId, amount, adminAmount, event) => {
-    let sell = {
-      tokenIdSell: _tokenId,
-      AmountSell: amount,
-      AdminAmount: adminAmount,
-      dataSell: event,
-    };
-    console.log(JSON.stringify(sell));
-  });
+  //   contract.on('sell', (_tokenId, amount, adminAmount, event) => {
+  //     let sell = {
+  //       tokenIdSell: _tokenId,
+  //       AmountSell: amount,
+  //       AdminAmount: adminAmount,
+  //       dataSell: event,
+  //     };
+  //     console.log(JSON.stringify(sell));
+  //   });
 }
 
 main();
