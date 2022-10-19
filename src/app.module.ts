@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { eventListen } from './event-listen/event-listen.entity';
 import { EventListenModule } from './event-listen/event-listen.module';
 
 @Module({
@@ -14,7 +15,7 @@ import { EventListenModule } from './event-listen/event-listen.module';
       database: 'task.management',
       autoLoadEntities: true,
       synchronize: true,
-      entities: [Task],
+      entities: [eventListen],
     }),
   ],
 })
