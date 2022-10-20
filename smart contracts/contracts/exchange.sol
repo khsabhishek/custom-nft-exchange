@@ -21,7 +21,7 @@ contract exchange is Ownable {
 
     event buy(address _to, uint256 _tokenId, uint256 _amounts);
 
-    event sell(uint256 _tokenId, uint256 amount, uint256 adminAmount);
+    event sell(address sender, uint256 _tokenId, uint256 amount, uint256 adminAmount);
 
     mapping(uint256 => uint256) private userAmount;
 
@@ -61,7 +61,7 @@ contract exchange is Ownable {
         erc20.transfer(admin, adminAmount);
         erc20.transfer(msg.sender, amount);
 
-        emit sell(_tokenId, amount, adminAmount);
+        emit sell( msg.sender ,_tokenId, amount, adminAmount);
     }
 
     function priceOfNFT(uint96 _price) external onlyOwner {
