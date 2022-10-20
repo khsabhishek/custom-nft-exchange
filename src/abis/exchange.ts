@@ -1,4 +1,4 @@
-[
+export const abi: any = [
 	{
 		"inputs": [
 			{

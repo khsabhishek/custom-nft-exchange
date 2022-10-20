@@ -1,9 +1,7 @@
 import { Repository } from 'typeorm';
-import { eventListen } from '../event-listen/event-listen.entity';
+import { EventListen } from '../event-listen/event-listen.entity';
 import { CustomRepository } from '../database/typeorm-ex.decorator';
 
-@CustomRepository(eventListen)
-export class EventRepository extends Repository<eventListen> {
-
-}
+@CustomRepository(EventListen)
+export class EventRepository extends Repository<EventListen> {}
 

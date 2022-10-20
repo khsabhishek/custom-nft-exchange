@@ -1,13 +1,22 @@
-import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity()
-export class eventListen {
-  @PrimaryGeneratedColumn()
-  to: string;
+export class EventListen {
+  @PrimaryColumn()
+  _to: string;
+
+  @Column('int', { array: true })
+  _tokenId: any[];
+
+  @Column('int', { array: true })
+  _amountBuy: any[];
 
   @Column()
-  tokenId: string;
+  _sold: boolean;
 
-  @Column()
-  amountBuy: string;
+  @Column('int', { array: true })
+  _amountSell: number[];
+
+  @Column('int', { array: true })
+  _adminAmount: number[];
 }
