@@ -1,6 +1,6 @@
 import { IsArray, IsBoolean, IsString } from 'class-validator';
 
-export class UserPurchaseHistory {
+export class UserSellHistory {
   @IsString()
   to: string;
 
@@ -8,8 +8,11 @@ export class UserPurchaseHistory {
   tokenId: number[];
 
   @IsArray()
-  amountBuy: number[];
+  amountSell: number[];
 
   @IsBoolean()
   sold: boolean;
+
+  @IsArray()
+  adminAmount: number[];
 }

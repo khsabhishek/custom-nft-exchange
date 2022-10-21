@@ -7,6 +7,7 @@ import { abi } from '../abis/exchange';
 import { retry } from 'rxjs';
 import { time } from 'console';
 import { UserPurchaseHistory } from './dto/user-purshase-history.dto';
+import { UserSellHistory } from './dto/user-sell-history.dto';
 // require('dotenv').config();
 
 @Injectable()
@@ -95,5 +96,20 @@ export class EventListenService {
     buyHistory.amountBuy = userHistory._amountBuy;
 
     return buyHistory;
+  }
+
+  async getSellHistory(user: string): Promise<UserSellHistory> {
+    this.listenSellEvents();
+    const userHistory = await this.eventRepository.findOne({
+      where: { _to: user },
+    });
+
+    const sellHistory = new UserSellHistory();
+    sellHistory.to = userHistory._to;
+    sellHistory.tokenId = userHistory._tokenId;
+    sellHistory.amountSell = userHistory._amountSell;
+    sellHistory.adminAmount = userHistory._adminAmount;
+
+    return sellHistory;
   }
 }
